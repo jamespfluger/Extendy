@@ -2,6 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Authors>James Pfluger</Authors>
+    <Description>A small collection of practical extension methods</Description>
+    <PackageIcon>extendy.png</PackageIcon>
+    <NeutralLanguage>https://github.com/jamespfluger/Extendy</NeutralLanguage>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Pictures\extendy.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

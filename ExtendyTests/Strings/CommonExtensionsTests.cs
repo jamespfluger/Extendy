@@ -17,10 +17,20 @@ namespace Extendy.Tests.Strings.Common
         [InlineData("spacesh1p", "spaceship", false)]
         [InlineData("", null, false)]
         [InlineData("null", null, false)]
-        public void EqualsIgnoreCaseTest(string input1, string input2, bool expectedValue)
+        public void EqualsIgnoreCaseTest(string input1, string input2, bool expectedResult)
         {
             bool isEqual = input1.EqualsIgnoreCase(input2);
-            Assert.Equal(expectedValue, isEqual);
+            Assert.Equal(expectedResult, isEqual);
+        }
+
+        [Theory]
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "val", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void DistinctByExceptionTest(string input1, string input2, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input1.EqualsIgnoreCase(input2));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
 
         [Theory]
@@ -36,19 +46,21 @@ namespace Extendy.Tests.Strings.Common
         [InlineData("The dog is good.", ".", true)]
         [InlineData("The dog is good.", "T", true)]
         [InlineData("spacesh1p", "spaceship", false)]
-        public void ContainsIgnoreCaseTest(string input1, string input2, bool expectedValue)
+        public void ContainsIgnoreCaseTest(string input1, string input2, bool expectedResult)
         {
             bool doesContain = input1.ContainsIgnoreCase(input2);
-            Assert.Equal(expectedValue, doesContain);
+            Assert.Equal(expectedResult, doesContain);
         }
 
         [Theory]
-        [InlineData("Spaceship", null)]
-        [InlineData("", null)]
-        [InlineData("null", null)]
-        public void ContainsIgnoreCaseTestNullArguments(string input1, string input2)
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "val", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("val", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
+        public void ContainsIgnoreCaseTestNullArguments(string input1, string input2, Type expectedExceptionType, string expectedErrorMessage)
         {
-            Assert.Throws<ArgumentNullException>(() => input1.ContainsIgnoreCase(input2));
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input1.ContainsIgnoreCase(input2));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
 
         [Theory]
@@ -62,19 +74,21 @@ namespace Extendy.Tests.Strings.Common
         [InlineData("Pumpkins", "s", false)]
         [InlineData("Has an EnD", "END", false)]
         [InlineData(" space", "  ", false)]
-        public void StartsWithIgnoreCaseTest(string input1, string input2, bool expectedValue)
+        public void StartsWithIgnoreCaseTest(string input1, string input2, bool expectedResult)
         {
             bool doesStartWith = input1.StartsWithIgnoreCase(input2);
-            Assert.Equal(expectedValue, doesStartWith);
+            Assert.Equal(expectedResult, doesStartWith);
         }
 
         [Theory]
-        [InlineData("Spaceship", null)]
-        [InlineData("", null)]
-        [InlineData("null", null)]
-        public void StartsWithIgnoreCaseTestNullArguments(string input1, string input2)
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "val", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("val", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
+        public void StartsWithIgnoreCaseTestNullArguments(string input1, string input2, Type expectedExceptionType, string expectedErrorMessage)
         {
-            Assert.Throws<ArgumentNullException>(() => input1.StartsWithIgnoreCase(input2));
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input1.StartsWithIgnoreCase(input2));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
 
         [Theory]
@@ -89,19 +103,21 @@ namespace Extendy.Tests.Strings.Common
         [InlineData("Pumpkins", "P", false)]
         [InlineData("Starts with this", "stArT", false)]
         [InlineData(" space", "  ", false)]
-        public void EndsWithIgnoreCaseTest(string input1, string input2, bool expectedValue)
+        public void EndsWithIgnoreCaseTest(string input1, string input2, bool expectedResult)
         {
             bool doesEndWith = input1.EndsWithIgnoreCase(input2);
-            Assert.Equal(expectedValue, doesEndWith);
+            Assert.Equal(expectedResult, doesEndWith);
         }
 
         [Theory]
-        [InlineData("Spaceship", null)]
-        [InlineData("", null)]
-        [InlineData("null", null)]
-        public void EndsWithIgnoreCaseTestNullArguments(string input1, string input2)
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "val", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("val", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
+        public void EndsWithIgnoreCaseTestNullArguments(string input1, string input2, Type expectedExceptionType, string expectedErrorMessage)
         {
-            Assert.Throws<ArgumentNullException>(() => input1.EndsWithIgnoreCase(input2));
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input1.EndsWithIgnoreCase(input2));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
     }
 }

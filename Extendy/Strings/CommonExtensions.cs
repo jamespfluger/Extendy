@@ -12,9 +12,13 @@ namespace Extendy.Strings.Common
         /// <param name="value">The string to compare to this instance.</param>
         /// <returns>true if the value of the <paramref name="value"/> parameter is the same as the value of this instance
         /// ignoring the case of the strings being compared; otherwise, false.</returns>
-        public static bool EqualsIgnoreCase(this string instance, string value)
+        /// <exception cref="ArgumentException" />
+        public static bool EqualsIgnoreCase(this string source, string value)
         {
-            return instance.Equals(value, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.Equals(value, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -24,9 +28,14 @@ namespace Extendy.Strings.Common
         /// <returns>true if the <paramref name="value"/> parameter occurs within this string, regardless of case, or if the <paramref name="value"/> is an empty string (""); otherwise, false.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static bool ContainsIgnoreCase(this string instance, string value)
+        public static bool ContainsIgnoreCase(this string source, string value)
         {
-            return instance.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>
@@ -36,9 +45,14 @@ namespace Extendy.Strings.Common
         /// <returns>true if <paramref name="value"/> matches the beginning of this string; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static bool StartsWithIgnoreCase(this string instance, string value)
+        public static bool StartsWithIgnoreCase(this string source, string value)
         {
-            return instance.StartsWith(value, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return source.StartsWith(value, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -48,9 +62,14 @@ namespace Extendy.Strings.Common
         /// <returns>true if <paramref name="value"/> matches the end of this string; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static bool EndsWithIgnoreCase(this string instance, string value)
+        public static bool EndsWithIgnoreCase(this string source, string value)
         {
-            return instance.EndsWith(value, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return source.EndsWith(value, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

@@ -24,8 +24,10 @@ namespace Extendy.Tests.Strings.Searching
         }
 
         [Theory]
-        [InlineData("d", new string[] { "1", "2", null, "d", "5" }, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
-        public void ContainsAnyStringExceptionTest(string haystackInput, string[] needlesInput, Type expectedExceptionType, string expectedErrorMessage)
+        [InlineData(null, new string[] { "1", "2", "3", "4", "5" }, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("abcde", new string[] { "1", "2", null, "4", "5" }, typeof(ArgumentNullException), "No argument can be null. (Parameter 'anyOf')")]
+        [InlineData("abcde", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'anyOf')")]
+        public void ContainsAnyExceptionTest(string haystackInput, string[] needlesInput, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => haystackInput.ContainsAny(needlesInput));
             Assert.NotNull(thrownException);
@@ -48,26 +50,14 @@ namespace Extendy.Tests.Strings.Searching
         }
 
         [Theory]
-        [InlineData("D", new string[] { "1", "2", null, "d", "5" }, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
-        public void ContainsAnyIgnoreCaseStringExceptionTest(string haystackInput, string[] needlesInput, Type expectedExceptionType, string expectedErrorMessage)
+        [InlineData(null, new string[] { "a", "B", "c", "D", "e" }, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("abcde", new string[] { "a", "B", null, "D", "e" }, typeof(ArgumentNullException), "No argument can be null. (Parameter 'anyOf')")]
+        [InlineData("abcde", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'anyOf')")]
+        public void ContainsAnyIgnoreCaseExceptionTest(string haystackInput, string[] needlesInput, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => haystackInput.ContainsAnyIgnoreCase(needlesInput));
             Assert.NotNull(thrownException);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-        }
-
-        [Theory]
-        [InlineData(null, "Seattle", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        public void ContainsAnyIgnoreCaseExceptionTest(string inputValue, string strToFind, Type expectedExceptionType, string expectedErrorMessage)
-        {
-            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(strToFind));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper()));
-            Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
-            Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
@@ -282,23 +272,20 @@ namespace Extendy.Tests.Strings.Searching
         }
 
         [Theory]
-        [InlineData(null, "Seattle", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         public void IndexOfIgnoreCaseStringExceptionTest(string inputValue, string strToFind, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(strToFind));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper()));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, "Seattle", 3, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", null, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("\0", null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("", null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
@@ -307,17 +294,14 @@ namespace Extendy.Tests.Strings.Searching
         public void IndexOfIgnoreCaseStringStartIndexExceptionTest(string inputValue, string strToFind, int startIndex, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(strToFind, startIndex));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper(), startIndex));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, "Seattle", 0, 3, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", 0, 1, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", 0, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", 0, 1, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", null, 0, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("\0", null, 0, 1, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("", null, 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
@@ -328,44 +312,35 @@ namespace Extendy.Tests.Strings.Searching
         public void IndexOfIgnoreCaseStringStartIndexAndCountExceptionTest(string inputValue, string strToFind, int startIndex, int count, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(strToFind, startIndex, count));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper(), startIndex, count));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         public void IndexOfIgnoreCaseCharExceptionTest(string inputValue, char charToFind, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(charToFind));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind)));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", 'a', -1, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 8, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         public void IndexOfIgnoreCaseCharStartIndexExceptionTest(string inputValue, char charToFind, int startIndex, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(charToFind, startIndex));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind), startIndex));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", 'a', -1, 0, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 8, 0, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 0, -1, typeof(ArgumentOutOfRangeException), "Count must be positive and count must refer to a location within the string/array/collection. (Parameter 'count')")]
@@ -373,11 +348,8 @@ namespace Extendy.Tests.Strings.Searching
         public void IndexOfIgnoreCaseCharStartIndexAndCountExceptionTest(string inputValue, char charToFind, int startIndex, int count, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IndexOfIgnoreCase(charToFind, startIndex, count));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind), startIndex, count));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
@@ -611,23 +583,20 @@ namespace Extendy.Tests.Strings.Searching
         }
 
         [Theory]
-        [InlineData(null, "Seattle", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         public void LastIndexOfIgnoreCaseStringExceptionTest(string inputValue, string strToFind, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(strToFind));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper()));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, "Seattle", 3, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", null, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("\0", null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("", null, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
@@ -636,17 +605,14 @@ namespace Extendy.Tests.Strings.Searching
         public void LastIndexOfIgnoreCaseStringStartIndexExceptionTest(string inputValue, string strToFind, int startIndex, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(strToFind, startIndex));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper(), startIndex));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, "Seattle", 0, 3, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, "\0", 0, 1, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, null, 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, "Seattle", 0, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, "\0", 0, 1, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, null, 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", null, 0, 3, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("\0", null, 0, 1, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
         [InlineData("", null, 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'value')")]
@@ -657,44 +623,35 @@ namespace Extendy.Tests.Strings.Searching
         public void LastIndexOfIgnoreCaseStringStartIndexAndCountExceptionTest(string inputValue, string strToFind, int startIndex, int count, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(strToFind, startIndex, count));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(strToFind?.ToUpper(), startIndex, count));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         public void LastIndexOfIgnoreCaseCharExceptionTest(string inputValue, char charToFind, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(charToFind));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind)));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", 'a', -1, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 8, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         public void LastIndexOfIgnoreCaseCharStartIndexExceptionTest(string inputValue, char charToFind, int startIndex, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(charToFind, startIndex));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind), startIndex));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
 
         [Theory]
-        [InlineData(null, 'c', 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
-        [InlineData(null, '\0', 0, 0, typeof(NullReferenceException), "Object reference not set to an instance of an object.")]
+        [InlineData(null, 'c', 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData(null, '\0', 0, 0, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("Seattle", 'a', -1, 0, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 8, 0, typeof(ArgumentOutOfRangeException), "Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'startIndex')")]
         [InlineData("Seattle", 'a', 0, -1, typeof(ArgumentOutOfRangeException), "Count must be positive and count must refer to a location within the string/array/collection. (Parameter 'count')")]
@@ -702,11 +659,8 @@ namespace Extendy.Tests.Strings.Searching
         public void LastIndexOfIgnoreCaseCharStartIndexAndCountExceptionTest(string inputValue, char charToFind, int startIndex, int count, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.LastIndexOfIgnoreCase(charToFind, startIndex, count));
-            Exception thrownExceptionSystem = Assert.Throws(expectedExceptionType, () => inputValue.ToUpper().LastIndexOf(char.ToUpper(charToFind), startIndex, count));
             Assert.NotNull(thrownException);
-            Assert.NotNull(thrownExceptionSystem);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
-            Assert.Equal(expectedErrorMessage, thrownExceptionSystem.Message);
         }
     }
 }

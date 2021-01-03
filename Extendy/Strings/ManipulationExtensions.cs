@@ -14,13 +14,16 @@ namespace Extendy.Strings.Manipulation
         /// <param name="length">The length of the substring to take</param>
         /// <returns>The left part of a string</returns>
         /// <exception cref="ArgumentOutOfRangeException" />
-        public static string Left(this string instance, int length)
+        public static string Left(this string source, int length)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (length < 0)
                 throw new ArgumentOutOfRangeException(nameof(length), $"{nameof(length)} cannot be less than zero.");
-            else if (length > instance.Length)
+            else if (length > source.Length)
                 throw new ArgumentOutOfRangeException(nameof(length), $"{nameof(length)} cannot be larger than length of string.");
-            return instance.Substring(0, length);
+
+            return source.Substring(0, length);
         }
 
         /// <summary>
@@ -29,25 +32,29 @@ namespace Extendy.Strings.Manipulation
         /// <param name="length">The length of the substring to take</param>
         /// <returns>The right part of a string</returns>
         /// <exception cref="ArgumentOutOfRangeException" />
-        public static string Right(this string instance, int length)
+        public static string Right(this string source, int length)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (length < 0)
                 throw new ArgumentOutOfRangeException(nameof(length), $"{nameof(length)} cannot be less than zero.");
-            else if (length > instance.Length)
+            else if (length > source.Length)
                 throw new ArgumentOutOfRangeException(nameof(length), $"{nameof(length)} cannot be larger than length of string.");
-            else
-                return instance.Substring(instance.Length - length, length);
+
+            return source.Substring(source.Length - length, length);
         }
 
         /// <summary>
         /// Inverts the order of the elements in a string
         /// </summary>
         /// <returns>The inverted string</returns>
-        public static string Reverse(this string instance)
+        public static string Reverse(this string source)
         {
-            List<string> g = new List<string>();
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
             StringBuilder reversedStringBuilder = new StringBuilder();
-            StringInfo stringInfo = new StringInfo(instance);
+            StringInfo stringInfo = new StringInfo(source);
 
             for (int i = stringInfo.LengthInTextElements - 1; i >= 0; i--)
             {
@@ -62,18 +69,20 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChar">A character to remove or null.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimIgnoreCase(this string instance, char trimChar)
+        public static string TrimIgnoreCase(this string source, char trimChar)
         {
-            if (string.IsNullOrEmpty(instance))
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source.Length == 0)
+                return source;
 
-            int startIndex = GetIndexOfLastLeadingChar(instance, trimChar);
-            int endIndex = GetIndexOfFirstTrailingChar(instance, trimChar);
+            int startIndex = GetIndexOfLastLeadingChar(source, trimChar);
+            int endIndex = GetIndexOfFirstTrailingChar(source, trimChar);
 
             if (startIndex > endIndex)
                 return "";
             else
-                return instance.Substring(startIndex, Math.Min(instance.Length, endIndex) - startIndex);
+                return source.Substring(startIndex, Math.Min(source.Length, endIndex) - startIndex);
         }
 
 
@@ -82,14 +91,16 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChar">A character to remove or null.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimStartIgnoreCase(this string instance, char trimChar)
+        public static string TrimStartIgnoreCase(this string source, char trimChar)
         {
-            if (string.IsNullOrEmpty(instance))
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source.Length == 0)
+                return source;
 
-            int startIndex = GetIndexOfLastLeadingChar(instance, trimChar);
+            int startIndex = GetIndexOfLastLeadingChar(source, trimChar);
 
-            return instance.Substring(startIndex);
+            return source.Substring(startIndex);
         }
 
 
@@ -98,14 +109,16 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChar">A character to remove or null.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimEndIgnoreCase(this string instance, char trimChar)
+        public static string TrimEndIgnoreCase(this string source, char trimChar)
         {
-            if (string.IsNullOrEmpty(instance))
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source.Length == 0)
+                return source;
 
-            int endIndex = GetIndexOfFirstTrailingChar(instance, trimChar);
+            int endIndex = GetIndexOfFirstTrailingChar(source, trimChar);
 
-            return instance.Substring(0, Math.Min(instance.Length, endIndex));
+            return source.Substring(0, Math.Min(source.Length, endIndex));
         }
 
         /// <summary>
@@ -113,18 +126,22 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChars">An array of Unicode characters.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimIgnoreCase(this string instance, char[] trimChars)
+        public static string TrimIgnoreCase(this string source, char[] trimChars)
         {
-            if (string.IsNullOrEmpty(instance) || trimChars.Length == 0)
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (trimChars == null)
+                throw new ArgumentNullException(nameof(trimChars));
+            if (source.Length == 0 || trimChars.Length == 0)
+                return source;
 
-            int startIndex = GetIndexOfLastLeadingAnyChar(instance, trimChars);
-            int endIndex = GetIndexOfFirstTrailingAnyChar(instance, trimChars);
+            int startIndex = GetIndexOfLastLeadingAnyChar(source, trimChars);
+            int endIndex = GetIndexOfFirstTrailingAnyChar(source, trimChars);
 
             if (startIndex > endIndex)
                 return "";
             else
-                return instance.Substring(startIndex, endIndex - startIndex);
+                return source.Substring(startIndex, endIndex - startIndex);
         }
 
         /// <summary>
@@ -132,14 +149,18 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChars">An array of Unicode characters.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimStartIgnoreCase(this string instance, char[] trimChars)
+        public static string TrimStartIgnoreCase(this string source, char[] trimChars)
         {
-            if (string.IsNullOrEmpty(instance) || trimChars.Length == 0)
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (trimChars == null)
+                throw new ArgumentNullException(nameof(trimChars));
+            if (source.Length == 0 || trimChars.Length == 0)
+                return source;
 
-            int startIndex = GetIndexOfLastLeadingAnyChar(instance, trimChars);
+            int startIndex = GetIndexOfLastLeadingAnyChar(source, trimChars);
 
-            return instance.Substring(startIndex);
+            return source.Substring(startIndex);
         }
 
         /// <summary>
@@ -147,14 +168,18 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChars">An array of Unicode characters.</param>
         /// <returns>The trimmed string.</returns>
-        public static string TrimEndIgnoreCase(this string instance, char[] trimChars)
+        public static string TrimEndIgnoreCase(this string source, char[] trimChars)
         {
-            if (string.IsNullOrEmpty(instance) || trimChars.Length == 0)
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (trimChars == null)
+                throw new ArgumentNullException(nameof(trimChars));
+            if (source.Length == 0 || trimChars.Length == 0)
+                return source;
 
-            int endIndex = GetIndexOfFirstTrailingAnyChar(instance, trimChars);
+            int endIndex = GetIndexOfFirstTrailingAnyChar(source, trimChars);
 
-            return instance.Substring(0, endIndex);
+            return source.Substring(0, endIndex);
         }
 
         /// <summary>
@@ -166,28 +191,30 @@ namespace Extendy.Strings.Manipulation
         /// <returns>A string that is equivalent to the current string except that all instances of <paramref name="oldValue"/>
         /// are replaced with <paramref name="newValue"/>, case agnostic. If <paramref name="oldValue"/> is not found in the current instance,
         /// the method returns the current instance unchanged.</returns>
-        public static string ReplaceIgnoreCase(this string instance, string oldValue, string newValue)
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        public static string ReplaceIgnoreCase(this string source, string oldValue, string newValue)
         {
-            if (instance == null)
-                throw new ArgumentNullException(nameof(instance));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
             if (oldValue == null)
                 throw new ArgumentNullException(nameof(oldValue));
-            if (instance.Length == 0)
-                return instance;
+            if (source.Length == 0)
+                return source;
             if (oldValue.Length == 0)
                 throw new ArgumentException("String cannot be of zero length.");
 
-            StringBuilder replacedString = new StringBuilder(instance.Length);
+            StringBuilder replacedString = new StringBuilder(source.Length);
             bool isNewValueNullOrEmpty = string.IsNullOrEmpty(newValue);
             int searchStartIndex = 0;
             int foundCharIndex;
 
-            while ((foundCharIndex = instance.IndexOf(oldValue, searchStartIndex, StringComparison.OrdinalIgnoreCase)) != -1)
+            while ((foundCharIndex = source.IndexOf(oldValue, searchStartIndex, StringComparison.OrdinalIgnoreCase)) != -1)
             {
                 int numCharsUntilReplacement = foundCharIndex - searchStartIndex;
                 if (numCharsUntilReplacement != 0)
                 {
-                    replacedString.Append(instance, searchStartIndex, numCharsUntilReplacement);
+                    replacedString.Append(source, searchStartIndex, numCharsUntilReplacement);
                 }
 
                 if (!isNewValueNullOrEmpty)
@@ -196,14 +223,14 @@ namespace Extendy.Strings.Manipulation
                 }
 
                 searchStartIndex = foundCharIndex + oldValue.Length;
-                if (searchStartIndex == instance.Length)
+                if (searchStartIndex == source.Length)
                 {
                     return replacedString.ToString();
                 }
             }
 
-            int numCharsUntilEnd = instance.Length - searchStartIndex;
-            replacedString.Append(instance, searchStartIndex, numCharsUntilEnd);
+            int numCharsUntilEnd = source.Length - searchStartIndex;
+            replacedString.Append(source, searchStartIndex, numCharsUntilEnd);
 
             return replacedString.ToString();
         }
@@ -217,18 +244,18 @@ namespace Extendy.Strings.Manipulation
         /// <returns>A string that is equivalent to the current string except that all instances of <paramref name="oldValue"/>
         /// are replaced with <paramref name="newValue"/>, case agnostic. If <paramref name="oldValue"/> is not found in the current instance,
         /// the method returns the current instance unchanged.</returns>
-        public static string ReplaceIgnoreCase(this string instance, char oldValue, char newValue)
+        public static string ReplaceIgnoreCase(this string source, char oldValue, char newValue)
         {
-            if (instance == null)
-                throw new ArgumentNullException(nameof(instance));
-            if (instance.Length == 0)
-                return instance;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (source.Length == 0)
+                return source;
 
             StringBuilder replacedString = new StringBuilder();
 
             char upperOldValue = char.ToUpper(oldValue);
 
-            foreach (char c in instance)
+            foreach (char c in source)
             {
                 if (char.ToUpper(c) == upperOldValue)
                     replacedString.Append(newValue);
@@ -239,13 +266,13 @@ namespace Extendy.Strings.Manipulation
             return replacedString.ToString();
         }
 
-        private static int GetIndexOfLastLeadingChar(string instance, char trimChar)
+        private static int GetIndexOfLastLeadingChar(string source, char trimChar)
         {
             int startIndex = 0;
 
-            for (int i = 0; i < instance.Length; i++)
+            for (int i = 0; i < source.Length; i++)
             {
-                if (char.ToUpper(instance[i]) == char.ToUpper(trimChar))
+                if (char.ToUpper(source[i]) == char.ToUpper(trimChar))
                     startIndex++;
                 else
                     break;
@@ -254,13 +281,13 @@ namespace Extendy.Strings.Manipulation
             return startIndex;
         }
 
-        private static int GetIndexOfFirstTrailingChar(string instance, char trimChar)
+        private static int GetIndexOfFirstTrailingChar(string source, char trimChar)
         {
-            int endIndex = instance.Length;
+            int endIndex = source.Length;
 
-            for (int i = instance.Length - 1; i >= 0; i--)
+            for (int i = source.Length - 1; i >= 0; i--)
             {
-                if (char.ToUpper(instance[i]) == char.ToUpper(trimChar))
+                if (char.ToUpper(source[i]) == char.ToUpper(trimChar))
                     endIndex--;
                 else
                     break;
@@ -269,13 +296,13 @@ namespace Extendy.Strings.Manipulation
             return endIndex;
         }
 
-        private static int GetIndexOfLastLeadingAnyChar(string instance, char[] trimChars)
+        private static int GetIndexOfLastLeadingAnyChar(string source, char[] trimChars)
         {
             int startIndex = 0;
 
-            for (int i = 0; i < instance.Length; i++)
+            for (int i = 0; i < source.Length; i++)
             {
-                if (trimChars.Any(trimChar => char.ToUpper(instance[i]) == char.ToUpper(trimChar)))
+                if (trimChars.Any(trimChar => char.ToUpper(source[i]) == char.ToUpper(trimChar)))
                     startIndex++;
                 else
                     break;
@@ -284,12 +311,12 @@ namespace Extendy.Strings.Manipulation
             return startIndex;
         }
 
-        private static int GetIndexOfFirstTrailingAnyChar(string instance, char[] trimChars)
+        private static int GetIndexOfFirstTrailingAnyChar(string source, char[] trimChars)
         {
-            int endIndex = instance.Length;
-            for (int i = instance.Length - 1; i >= 0; i--)
+            int endIndex = source.Length;
+            for (int i = source.Length - 1; i >= 0; i--)
             {
-                if (trimChars.Any(trimChar => char.ToUpper(instance[i]) == char.ToUpper(trimChar)))
+                if (trimChars.Any(trimChar => char.ToUpper(source[i]) == char.ToUpper(trimChar)))
                     endIndex--;
                 else
                     break;

@@ -7,27 +7,41 @@ namespace Extendy.Strings.Searching
     public static class SearchingExtensions
     {
         /// <summary>
-        /// Determines whether this string occurs in <paramref name="needles"/> or not.
+        /// Determines whether this string occurs in <paramref name="anyOf"/> or not.
         /// </summary>
-        /// <param name="needles">The set of strings to check for the existence of the string.</param>
-        /// <returns>true if the <see cref="string"/> exists within <paramref name="needles"/>; otherwise, false.</returns>
+        /// <param name="anyOf">The set of strings to check for the existence of the string.</param>
+        /// <returns>true if the <see cref="string"/> exists within <paramref name="anyOf"/>; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static bool ContainsAny(this string haystack, params string[] needles) 
+        public static bool ContainsAny(this string source, params string[] anyOf)
         {
-            return needles.Any(haystack.Contains);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (anyOf == null)
+                throw new ArgumentNullException(nameof(anyOf));
+            if (anyOf.Any(v => v == null))
+                throw new ArgumentNullException(nameof(anyOf), $"No argument can be null.");
+
+            return anyOf.Any(source.Contains);
         }
 
         /// <summary>
-        /// Determines whether this string occurs in <paramref name="needles"/> or not, case agnostic.
+        /// Determines whether this string occurs in <paramref name="anyOf"/> or not, case agnostic.
         /// </summary>
-        /// <param name="needles">The set of strings to check for the existence of the string.</param>
-        /// <returns>true if the <see cref="string"/> exists within <paramref name="needles"/>; otherwise, false.</returns>
+        /// <param name="anyOf">The set of strings to check for the existence of the string.</param>
+        /// <returns>true if the <see cref="string"/> exists within <paramref name="anyOf"/>; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static bool ContainsAnyIgnoreCase(this string haystack, params string[] needles) 
+        public static bool ContainsAnyIgnoreCase(this string source, params string[] anyOf)
         {
-            return needles.Any(n => haystack.ContainsIgnoreCase(n));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (anyOf == null)
+                throw new ArgumentNullException(nameof(anyOf));
+            if (anyOf.Any(v => v == null))
+                throw new ArgumentNullException(nameof(anyOf), $"No argument can be null.");
+
+            return anyOf.Any(n => source.ContainsIgnoreCase(n));
         }
 
         /// <summary>
@@ -37,9 +51,12 @@ namespace Extendy.Strings.Searching
         /// <returns>The zero-based index position of <paramref name="value"/> if that character is found, or -1 if it is not.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, string value)
+        public static int IndexOfIgnoreCase(this string source, string value)
         {
-            return instance.IndexOf(value, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.IndexOf(value, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -52,9 +69,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, string value, int startIndex)
+        public static int IndexOfIgnoreCase(this string source, string value, int startIndex)
         {
-            return instance.IndexOf(value, startIndex, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.IndexOf(value, startIndex, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -68,9 +88,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, string value, int startIndex, int count)
+        public static int IndexOfIgnoreCase(this string source, string value, int startIndex, int count)
         {
-            return instance.IndexOf(value, startIndex, count, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.IndexOf(value, startIndex, count, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -80,9 +103,12 @@ namespace Extendy.Strings.Searching
         /// <returns>The zero-based index position of <paramref name="value"/> if that character is found, or -1 if it is not.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, char value)
+        public static int IndexOfIgnoreCase(this string source, char value)
         {
-            return IndexOfIgnoreCaseInternal(instance, value, 0, instance.Length);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return IndexOfIgnoreCaseInternal(source, value, 0, source.Length);
         }
 
         /// <summary>
@@ -95,9 +121,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, char value, int startIndex)
+        public static int IndexOfIgnoreCase(this string source, char value, int startIndex)
         {
-            return IndexOfIgnoreCaseInternal(instance, value, startIndex, instance.Length - startIndex);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return IndexOfIgnoreCaseInternal(source, value, startIndex, source.Length - startIndex);
         }
 
         /// <summary>
@@ -111,9 +140,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int IndexOfIgnoreCase(this string instance, char value, int startIndex, int count)
+        public static int IndexOfIgnoreCase(this string source, char value, int startIndex, int count)
         {
-            return IndexOfIgnoreCaseInternal(instance, value, startIndex, count);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return IndexOfIgnoreCaseInternal(source, value, startIndex, count);
         }
 
         /// <summary>
@@ -123,9 +155,12 @@ namespace Extendy.Strings.Searching
         /// <returns>The zero-based index position of <paramref name="value"/> if that character is found, or -1 if it is not.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, string value)
+        public static int LastIndexOfIgnoreCase(this string source, string value)
         {
-            return instance.LastIndexOf(value, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.LastIndexOf(value, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -138,9 +173,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, string value, int startIndex)
+        public static int LastIndexOfIgnoreCase(this string source, string value, int startIndex)
         {
-            return instance.LastIndexOf(value, startIndex, startIndex + 1, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.LastIndexOf(value, startIndex, startIndex + 1, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -153,9 +191,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, string value, int startIndex, int count)
+        public static int LastIndexOfIgnoreCase(this string source, string value, int startIndex, int count)
         {
-            return instance.LastIndexOf(value, startIndex, count, StringComparison.OrdinalIgnoreCase);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.LastIndexOf(value, startIndex, count, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -165,9 +206,12 @@ namespace Extendy.Strings.Searching
         /// <param name="value">The string to seek.</param>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, char value)
+        public static int LastIndexOfIgnoreCase(this string source, char value)
         {
-            return LastIndexOfIgnoreCaseInternal(instance, value, instance.Length - 1, instance.Length);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return LastIndexOfIgnoreCaseInternal(source, value, source.Length - 1, source.Length);
         }
 
         /// <summary>
@@ -179,9 +223,12 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, char value, int startIndex)
+        public static int LastIndexOfIgnoreCase(this string source, char value, int startIndex)
         {
-            return LastIndexOfIgnoreCaseInternal(instance, value, startIndex, startIndex + 1);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return LastIndexOfIgnoreCaseInternal(source, value, startIndex, startIndex + 1);
         }
 
         /// <summary>
@@ -194,27 +241,30 @@ namespace Extendy.Strings.Searching
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
-        public static int LastIndexOfIgnoreCase(this string instance, char value, int startIndex, int count)
+        public static int LastIndexOfIgnoreCase(this string source, char value, int startIndex, int count)
         {
-            return LastIndexOfIgnoreCaseInternal(instance, value, startIndex, count);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return LastIndexOfIgnoreCaseInternal(source, value, startIndex, count);
         }
 
-        private static int LastIndexOfIgnoreCaseInternal(string instance, char value, int startIndex, int count)
+        private static int LastIndexOfIgnoreCaseInternal(string source, char value, int startIndex, int count)
         {
             char invertedCaseValue = char.IsUpper(value) ? char.ToLower(value) : char.ToUpper(value);
 
-            int lastIndex = instance.LastIndexOf(value, startIndex, count);
-            int lastIndexOfInverted = instance.LastIndexOf(invertedCaseValue, startIndex, count);
+            int lastIndex = source.LastIndexOf(value, startIndex, count);
+            int lastIndexOfInverted = source.LastIndexOf(invertedCaseValue, startIndex, count);
 
             return Math.Max(lastIndex, lastIndexOfInverted);
         }
 
-        private static int IndexOfIgnoreCaseInternal(string instance, char value, int startIndex, int count)
+        private static int IndexOfIgnoreCaseInternal(string source, char value, int startIndex, int count)
         {
             char invertedCaseValue = char.IsUpper(value) ? char.ToLower(value) : char.ToUpper(value);
 
-            int index = instance.IndexOf(value, startIndex, count);
-            int indexOfInverted = instance.IndexOf(invertedCaseValue, startIndex, count);
+            int index = source.IndexOf(value, startIndex, count);
+            int indexOfInverted = source.IndexOf(invertedCaseValue, startIndex, count);
 
             if (index != -1 && indexOfInverted != -1)
                 return Math.Min(index, indexOfInverted);

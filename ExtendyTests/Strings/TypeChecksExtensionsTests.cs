@@ -36,6 +36,15 @@ namespace Extendy.Tests.Strings.TypeChecks
         }
 
         [Theory]
+        [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void IsNumericExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsNumeric());
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
         [InlineData("Spaceshuttle", true)]
         [InlineData("seven", true)]
         [InlineData("seventy7", false)]
@@ -53,6 +62,15 @@ namespace Extendy.Tests.Strings.TypeChecks
         {
             bool isAlphabetic = inputValue.IsAlphabetic();
             Assert.Equal(expectedResult, isAlphabetic);
+        }
+
+        [Theory]
+        [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void IsAlphabeticExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsAlphabetic());
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
 
         [Theory]
@@ -86,6 +104,15 @@ namespace Extendy.Tests.Strings.TypeChecks
         }
 
         [Theory]
+        [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void IsAlphaNumericExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsAlphaNumeric());
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
         [InlineData("UPPER", true)]
         [InlineData("LOw", false)]
         [InlineData("Lower", false)]
@@ -107,6 +134,15 @@ namespace Extendy.Tests.Strings.TypeChecks
         }
 
         [Theory]
+        [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void IsUpperExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsUpper());
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
         [InlineData("lower", true)]
         [InlineData("High", false)]
         [InlineData("HIGHEr", false)]
@@ -125,6 +161,15 @@ namespace Extendy.Tests.Strings.TypeChecks
         {
             bool isLower = inputValue.IsLower();
             Assert.Equal(expectedResult, isLower);
+        }
+
+        [Theory]
+        [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void IsLowerExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsLower());
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
     }
 }
