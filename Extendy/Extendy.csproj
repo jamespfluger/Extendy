@@ -6,8 +6,10 @@
     <Version>0.1.0</Version>
     <Authors>James Pfluger</Authors>
     <Description>A small collection of practical extension methods</Description>
-    <PackageIcon>extendy.png</PackageIcon>
-    <NeutralLanguage>https://github.com/jamespfluger/Extendy</NeutralLanguage>
+    <PackageIcon>Extendy.png</PackageIcon>
+    <NeutralLanguage></NeutralLanguage>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/jamespfluger/Extendy</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\Pictures\extendy.png">
+    <None Include="Extendy.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
