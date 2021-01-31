@@ -1,8 +1,7 @@
-﻿using Xunit;
-using Extendy.DateTimes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Extendy.DateTimes;
+using Xunit;
 
 namespace Extendy.Enums.Tests
 {

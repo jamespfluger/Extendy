@@ -1,8 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using Extendy.Strings.TypeChecks;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Xunit;
 
 namespace Extendy.Tests.Strings.TypeChecks
 {

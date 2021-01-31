@@ -1,8 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using Extendy.Strings.Searching;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Xunit;
 
 namespace Extendy.Tests.Strings.Searching
 {
