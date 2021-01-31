@@ -1,13 +1,103 @@
 ﻿using Xunit;
-using Extendy.Strings.Manipulation;
+using Extendy.Strings.Modification;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Extendy.Tests.Strings.Manipulation
+namespace Extendy.Tests.Strings.Modification
 {
-    public class ManipulationExtensionsTests
+    public class ModificationExtensionsTests
     {
+        [Theory]
+        [InlineData("Seattle", "ea", "Sttle")]
+        [InlineData("Seattle", "EA", "Seattle")]
+        [InlineData("Seattle", "S", "eattle")]
+        [InlineData("Seattle", "s", "Seattle")]
+        [InlineData("", "Seattle", "")]
+        public void RemoveStringTest(string input, string toRemove, string expectedResult)
+        {
+            string newValue = input.RemoveAll(toRemove);
+            Assert.Equal(expectedResult, newValue);
+        }
+
+        [Theory]
+        [InlineData("Seattle", 'e', "Sattl")]
+        [InlineData("Seattle", 'E', "Seattle")]
+        [InlineData("Seattle", 't', "Seale")]
+        [InlineData("Seattle", 'T', "Seattle")]
+        [InlineData("Seattle", '\0', "Seattle")]
+        [InlineData("\0Se\0attle\0", '\0', "Seattle")]
+        public void RemoveCharTest(string input, char toRemove, string expectedResult)
+        {
+            string newValue = input.RemoveAll(toRemove);
+            Assert.Equal(expectedResult, newValue);
+        }
+        
+        [Theory]
+        [InlineData("Seattle", "ea", "Sttle")]
+        [InlineData("Seattle", "EA", "Sttle")]
+        [InlineData("Seattle", "S", "eattle")]
+        [InlineData("Seattle", "s", "eattle")]
+        [InlineData("", "Seattle", "")]
+        public void RemoveStringIgnoreCaseTest(string input, string toRemove, string expectedResult)
+        {
+            string newValue = input.RemoveAllIgnoreCase(toRemove);
+            Assert.Equal(expectedResult, newValue);
+        }
+
+        [Theory]
+        [InlineData("Seattle", 'e', "Sattl")]
+        [InlineData("Seattle", 'E', "Sattl")]
+        [InlineData("Seattle", 't', "Seale")]
+        [InlineData("Seattle", 'T', "Seale")]
+        [InlineData("Seattle", '\0', "Seattle")]
+        [InlineData("\0Se\0attle\0", '\0', "Seattle")]
+        public void RemoveCharIgnoreCaseTest(string input, char toRemove, string expectedResult)
+        {
+            string newValue = input.RemoveAllIgnoreCase(toRemove);
+            Assert.Equal(expectedResult, newValue);
+        }
+
+        [Theory]
+        [InlineData(null, "RemoveThis", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("Source data", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'toRemove')")]
+        [InlineData("Source data", "", typeof(ArgumentException), "String cannot be of zero length.")]
+        public void RemoveStringExceptionTest(string input, string toRemove, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input.RemoveAll(toRemove));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
+        [InlineData(null, 'a', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void RemoveCharExceptionTest(string input, char toRemove, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input.RemoveAll(toRemove));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
+        [InlineData(null, "RemoveThis", typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        [InlineData("Source data", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'toRemove')")]
+        [InlineData("Source data", "", typeof(ArgumentException), "String cannot be of zero length.")]
+        public void RemoveStringIgnoreCaseExceptionTest(string input, string toRemove, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input.RemoveAllIgnoreCase(toRemove));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
+        [Theory]
+        [InlineData(null, 'a', typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
+        public void RemoveCharIgnoreCaseExceptionTest(string input, char toRemove, Type expectedExceptionType, string expectedErrorMessage)
+        {
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => input.RemoveAllIgnoreCase(toRemove));
+            Assert.NotNull(thrownException);
+            Assert.Equal(expectedErrorMessage, thrownException.Message);
+        }
+
         [Theory]
         [InlineData("Seattle", 0, "")]
         [InlineData("Seattle", 1, "S")]

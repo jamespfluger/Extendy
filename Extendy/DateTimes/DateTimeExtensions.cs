@@ -12,7 +12,7 @@ namespace Extendy.DateTimes
         /// <returns>Whether or not the date is the current date</returns>
         public static bool IsToday(this DateTime inputDate)
         {
-            return DateTime.Today.Year == inputDate.Year && DateTime.Today.DayOfYear == inputDate.DayOfYear;
+            return DateTime.Today == inputDate.Date;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Extendy.DateTimes
         /// <returns>Whether or not the date is the current UTC date</returns>
         public static bool IsTodayUtc(this DateTime inputDateUtc)
         {
-            return DateTime.UtcNow.Year == inputDateUtc.Year && DateTime.UtcNow.DayOfYear == inputDateUtc.DayOfYear;
+            return DateTime.UtcNow.Date == inputDateUtc.Date;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Extendy.DateTimes
         /// <returns>Whether or not another date is the same as the current instance</returns>
         public static bool IsSameDay(this DateTime inputDate, DateTime otherDate)
         {
-            return inputDate.Year == otherDate.Year && inputDate.DayOfYear == otherDate.DayOfYear;
+            return inputDate.Date == otherDate.Date;
         }
     }
 }
