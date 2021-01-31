@@ -17,7 +17,7 @@ namespace Extendy.Strings.TypeChecks
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return !string.IsNullOrWhiteSpace(source) && source.All(c => char.IsDigit(c));
+            return source.Length != 0 && source.All(c => char.IsDigit(c));
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Extendy.Strings.TypeChecks
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return !string.IsNullOrWhiteSpace(source) && source.All(c => char.IsLetter(c));
+            return source.Length != 0 && source.All(c => char.IsLetter(c));
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Extendy.Strings.TypeChecks
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return !string.IsNullOrWhiteSpace(source) && source.All(c => char.IsLetterOrDigit(c));
+            return source.Length != 0 && source.All(c => char.IsLetterOrDigit(c));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Extendy.Strings.TypeChecks
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return !string.IsNullOrWhiteSpace(source) && source.All(c => char.IsLetter(c) && char.IsUpper(c));
+            return source.Length != 0 && source.All(c => char.IsLetter(c) && char.IsUpper(c));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Extendy.Strings.TypeChecks
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            return !string.IsNullOrWhiteSpace(source) && source.All(c => char.IsLetter(c) && char.IsLower(c));
+            return source.Length != 0 && source.All(c => char.IsLetter(c) && char.IsLower(c));
         }
     }
 }

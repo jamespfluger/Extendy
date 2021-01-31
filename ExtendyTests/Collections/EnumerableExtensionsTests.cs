@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using Extendy.Collections;
 using ExtendyTests.TestData;
-using ExtendyTests.TestData;
 using Xunit;
 
 namespace Extendy.Collections.Tests
 {
-    public class IEnumerableExtensionsTests
+    public class EnumerableExtensionsTests
     {
         [Theory]
         [InlineData(true, new string[] { "abc" }, new string[] { "abc", "def", "geh" })]
@@ -165,7 +164,7 @@ namespace Extendy.Collections.Tests
         {
             List<string> newList = originalArray.ToList();
             newList.RemoveDuplicates();
-            Assert.Equal(expectedArray.ToList(), newList);
+            Assert.Equal(expectedArray, newList);
         }
 
         [Theory]

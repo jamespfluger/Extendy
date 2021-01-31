@@ -4,10 +4,77 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Extendy.Strings.Manipulation
+namespace Extendy.Strings.Modification
 {
-    public static class ManipulationExtensions
+    public static class ModificationExtensions
     {
+        /// <summary>
+        /// Returns a new string in which all occurrences of <paramref name="toRemove"/> in the current instance have been deleted.
+        /// </summary>
+        /// <param name="toRemove">The character to delete from the current instance.</param>
+        /// <returns>A new string that is equivalent to his string except for the removed characters.</returns>
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        public static string RemoveAll(this string source, string toRemove)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (toRemove == null)
+                throw new ArgumentNullException(nameof(toRemove));
+            if (toRemove.Length == 0)
+                throw new ArgumentException("String cannot be of zero length.");
+
+            return source.Replace(toRemove, "");
+        }
+
+        /// <summary>
+        /// Returns a new string in which all occurrences of the <paramref name="toRemove"/> char in the current instance have been deleted.
+        /// </summary>
+        /// <param name="toRemove">The character to delete from the current instance.</param>
+        /// <returns>A new string that is equivalent to his string except for the removed characters.</returns>
+        /// <exception cref="ArgumentNullException" />
+        public static string RemoveAll(this string source, char toRemove)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.Replace(toRemove.ToString(), "");
+        }
+
+        /// <summary>
+        /// Returns a new string in which all occurrences of <paramref name="toRemove"/>, case agnostic, in the current instance have been deleted.
+        /// </summary>
+        /// <param name="toRemove">The character to delete from the current instance.</param>
+        /// <returns>A new string that is equivalent to his string except for the removed characters.</returns>
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        public static string RemoveAllIgnoreCase(this string source, string toRemove)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (toRemove == null)
+                throw new ArgumentNullException(nameof(toRemove));
+            if (toRemove.Length == 0)
+                throw new ArgumentException("String cannot be of zero length.");
+
+            return source.ReplaceIgnoreCase(toRemove, "");
+        }
+
+        /// <summary>
+        /// Returns a new string in which all occurrences of the <paramref name="toRemove"/> char, case agnostic, in the current instance have been deleted.
+        /// </summary>
+        /// <param name="toRemove">The character to delete from the current instance.</param>
+        /// <returns>A new string that is equivalent to his string except for the removed characters.</returns>
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        public static string RemoveAllIgnoreCase(this string source, char toRemove)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return source.ReplaceIgnoreCase(toRemove.ToString(), "");
+        }
+        
         /// <summary>
         /// Returns the left substring of a given length from the current string object.
         /// </summary>
@@ -168,6 +235,7 @@ namespace Extendy.Strings.Manipulation
         /// </summary>
         /// <param name="trimChars">An array of Unicode characters.</param>
         /// <returns>The trimmed string.</returns>
+        /// <exception cref="ArgumentNullException" />
         public static string TrimEndIgnoreCase(this string source, char[] trimChars)
         {
             if (source == null)
@@ -244,6 +312,7 @@ namespace Extendy.Strings.Manipulation
         /// <returns>A string that is equivalent to the current string except that all instances of <paramref name="oldValue"/>
         /// are replaced with <paramref name="newValue"/>, case agnostic. If <paramref name="oldValue"/> is not found in the current instance,
         /// the method returns the current instance unchanged.</returns>
+        /// <exception cref="ArgumentNullException" />
         public static string ReplaceIgnoreCase(this string source, char oldValue, char newValue)
         {
             if (source == null)

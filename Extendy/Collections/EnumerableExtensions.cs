@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Extendy.Collections
 {
-    public static class IEnumerableExtensions
+    public static class EnumerableExtensions
     {
         /// <summary>
         /// Checks whether any of the <paramref name="values"/> exist in the <paramref name="source"/>
@@ -62,7 +62,7 @@ namespace Extendy.Collections
         }
 
         /// <summary>
-        /// Removes duplicate values from the <see cref="IEnumerable{T}"/>
+        /// Removes duplicate values from the <see cref="ICollection{T}"/>
         /// </summary>
         /// <typeparam name="T">The type of objects in the collection.</typeparam>
         /// <param name="source">The collection to remove duplicates from</param>
