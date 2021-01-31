@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Extendy.Collections;
 using ExtendyTests.TestData;
-using ExtendyTests.TestData;
 using Xunit;
 
 namespace Extendy.Collections.Tests

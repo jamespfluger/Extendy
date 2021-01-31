@@ -464,7 +464,6 @@ namespace Extendy.Tests.Strings.Modification
         [Theory]
         [InlineData(null, new char[] { 'a' }, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         [InlineData("input", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'trimChars')")]
-        [InlineData("input", null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'trimChars')")]
         public void TrimIgnoreCaseCharArrayExceptionTest(string input, char[] trimChars, Type expectedExceptionType, string expectedErrorMessage)
         {
             Exception thrownException = Assert.Throws(expectedExceptionType, () => input.TrimIgnoreCase(trimChars));
