@@ -1,0 +1,38 @@
+name: .NET Build and Test
+
+on:
+  [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checks out repository for use
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    # Perform initial .NET setup requirements
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    
+    # Restore dependencies required
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    # Build the solution for Release without restoring the dependencies
+    - name: Build
+      run: dotnet build --configuration release --no-restore
+    
+    # Run all the tests and collect the test coverage info using coverlet
+    - name: Test
+      run: dotnet test --no-build --configuration release --verbosity minimal /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+    
+    # Upload the coverage results to Codecov
+    - name: Codecov Upload
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./ExtendyTests/coverage.info
