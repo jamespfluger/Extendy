@@ -1,9 +1,5 @@
-﻿using Xunit;
-using Extendy.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ExtendyTests.TestData;
+﻿using System;
+using Xunit;
 
 namespace Extendy.Enums.Tests
 {

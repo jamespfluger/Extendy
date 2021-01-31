@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -74,7 +73,7 @@ namespace Extendy.Strings.Modification
 
             return source.ReplaceIgnoreCase(toRemove.ToString(), "");
         }
-        
+
         /// <summary>
         /// Returns the left substring of a given length from the current string object.
         /// </summary>

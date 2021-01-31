@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Extendy.Collections;
 using ExtendyTests.TestData;
 using Xunit;
 
@@ -23,7 +21,6 @@ namespace Extendy.Collections.Tests
         [InlineData(false, new string[] { "abc", "def", "geh" }, new string[] { "" })]
         [InlineData(false, new string[] { "" }, new string[] { "abc", "def", "geh" })]
         [InlineData(false, new string[] { "\0" }, new string[] { "abc", "def", "geh" })]
-        [InlineData(false, new string[] { "abc", "def", "geh" }, new string[] { "\0" })]
         [InlineData(false, new string[] { null }, new string[] { "abc", "def", "geh" })]
         [InlineData(false, new string[] { "abc", "def", "geh" }, new string[] { null })]
         [InlineData(true, new string[] { null }, new string[] { "abc", null, null })]

@@ -1,8 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using Extendy.Strings.Modification;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Xunit;
 
 namespace Extendy.Tests.Strings.Modification
 {
@@ -32,7 +30,7 @@ namespace Extendy.Tests.Strings.Modification
             string newValue = input.RemoveAll(toRemove);
             Assert.Equal(expectedResult, newValue);
         }
-        
+
         [Theory]
         [InlineData("Seattle", "ea", "Sttle")]
         [InlineData("Seattle", "EA", "Sttle")]

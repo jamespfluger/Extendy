@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using Extendy.Strings.Common;
-using System;
+using Xunit;
 
 namespace Extendy.Tests.Strings.Common
 {
