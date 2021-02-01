@@ -1,4 +1,4 @@
-# Extendy - a simple extension methods library for C#
+# Extendy - a simple library of extension methods for C#
 
 [![build](https://github.com/jamespfluger/extendy/workflows/build/badge.svg)](https://github.com/jamespfluger/Extendy/actions?query=workflow%3Abuild)
 [![codecov](https://codecov.io/gh/jamespfluger/extendy/branch/main/graph/badge.svg)](https://codecov.io/gh/jamespfluger/Extendy)
