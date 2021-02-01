@@ -10,8 +10,6 @@ A simple C# library for various extension methods
 ## Why use Extendy?
 If you find yourself constantly needing to write extension methods or tediously re-write implementations of them, then this package is right for you. Rather than doing all of that yourself, you can simply install Extendy. Now you can just use methods such as `yourVar.EqualsIgnoreCase(otherVar)` instead of the overly verbose `yourVar.Equals(someOtherVar, StringComparison.OrdinalIgnoreCase)`.
 
----
-
 ### Can I contribute?
 Absolutely! Open an issue up and we'll discuss your proposal. I don't want this repo to become bloated with too many methods. They are meant to be practical and used often. More niche ones can be found elsewhere or written into your project.
 
