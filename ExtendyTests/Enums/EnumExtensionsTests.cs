@@ -1,7 +1,8 @@
 ﻿using System;
+using Extendy.Enums;
 using Xunit;
 
-namespace Extendy.Enums.Tests
+namespace ExtendyTests.Enums
 {
     public class EnumExtensionsTests
     {

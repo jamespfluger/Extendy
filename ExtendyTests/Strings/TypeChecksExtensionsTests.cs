@@ -2,7 +2,7 @@
 using Extendy.Strings.TypeChecks;
 using Xunit;
 
-namespace Extendy.Tests.Strings.TypeChecks
+namespace ExtendyTests.Strings.TypeChecks
 {
     public class TypeChecksExtensionsTests
     {

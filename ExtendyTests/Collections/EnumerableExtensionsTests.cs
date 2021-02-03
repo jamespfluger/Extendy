@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Extendy.Collections;
 using ExtendyTests.TestData;
 using Xunit;
 
-namespace Extendy.Collections.Tests
+namespace ExtendyTests.Collections
 {
     public class EnumerableExtensionsTests
     {

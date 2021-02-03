@@ -2,7 +2,7 @@
 using Extendy.Strings.Common;
 using Xunit;
 
-namespace Extendy.Tests.Strings.Common
+namespace ExtendyTests.Strings.Common
 {
     public class CommonExtensionsTests
     {

@@ -2,7 +2,7 @@
 using Extendy.Strings.Searching;
 using Xunit;
 
-namespace Extendy.Tests.Strings.Searching
+namespace ExtendyTests.Strings.Searching
 {
     public class SearchingExtensionsTests
     {
