@@ -152,7 +152,8 @@ namespace Extendy.Strings.Searching
         /// Reports the zero-based index of the last occurrence of the specified string in this instance, case agnostic.
         /// </summary>
         /// <param name="value">The string to seek.</param>
-        /// <returns>The zero-based index position of <paramref name="value"/> if that character is found, or -1 if it is not.</returns>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that string is found, or -1 if it is not.
+        /// If <paramref name="value"/> is empty, the return value is the last index position in this instance.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
         public static int LastIndexOfIgnoreCase(this string source, string value)
@@ -169,7 +170,9 @@ namespace Extendy.Strings.Searching
         /// </summary>
         /// <param name="value">The string to seek.</param>
         /// <param name="startIndex">The search starting position.</param>
-        /// <returns>The zero-based index position of <paramref name="value"/> if that character is found, or -1 if it is not.</returns>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that string is found,
+        /// or -1 if it is not or if the current instance is empty
+        /// If <paramref name="value"/> is empty, the return value is the smaller of <paramref name="startIndex"/> and the last index position in this instance.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
@@ -188,6 +191,9 @@ namespace Extendy.Strings.Searching
         /// <param name="value">The string to seek.</param>
         /// <param name="startIndex">The search starting position.</param>
         /// <param name="count">The number of character positions to examine.</param>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that string is found,
+        /// or -1 if it is not or if the current instance is empty
+        /// If <paramref name="value"/> is empty, the return value is the smaller of <paramref name="startIndex"/> and the last index position in this instance.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
@@ -200,10 +206,12 @@ namespace Extendy.Strings.Searching
         }
 
         /// <summary>
-        /// Reports the zero-based index of the last occurrence of the specified string in this instance, case agnostic.
+        /// Reports the zero-based index of the last occurrence of the specified Unicode character in this instance, case agnostic.
         /// The search starts at a specified index and works backwards through the string for the specified number of character positions.
         /// </summary>
-        /// <param name="value">The string to seek.</param>
+        /// <param name="value">The Unicode character to seek.</param>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that Unicode character is found,
+        /// or -1 if it is not or if the current instance is empty.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentException" />
         public static int LastIndexOfIgnoreCase(this string source, char value)
@@ -218,8 +226,10 @@ namespace Extendy.Strings.Searching
         /// Reports the zero-based index of the last occurrence of the specified Unicode character in this instance, case agnostic.
         /// The search starts at a specified index and works backwards through the string for the specified number of character positions.
         /// </summary>
-        /// <param name="value">The string to seek.</param>
+        /// <param name="value">The Unicode character to seek.</param>
         /// <param name="startIndex">The search starting position.</param>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that Unicode character is found,
+        /// or -1 if it is not or if the current instance is empty.</returns>
         /// <exception cref="ArgumentNullException" />
         /// <exception cref="ArgumentOutOfRangeException" />
         /// <exception cref="ArgumentException" />
@@ -235,7 +245,9 @@ namespace Extendy.Strings.Searching
         /// Reports the zero-based index of the last occurrence of the specified Unicode character in this instance, case agnostic.
         /// The search starts at a specified index and works backwards through the string for the specified number of character positions.
         /// </summary>
-        /// <param name="value">The string to seek.</param>
+        /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that Unicode character is found,
+        /// or -1 if it is not or if the current instance is empty.</returns>
+        /// <param name="value">The Unicode character to seek.</param>
         /// <param name="startIndex">The search starting position.</param>
         /// <param name="count">The number of character positions to examine.</param>
         /// <exception cref="ArgumentNullException" />

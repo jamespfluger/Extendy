@@ -14,6 +14,7 @@ namespace Extendy.Collections
         /// <param name="values">The elements to check for in the collection
         /// The collection itself cannot be null, but the values can be null, if T is a reference type./></param>.
         /// <exception cref="ArgumentNullException" />
+        /// <returns>true if any one of the <paramref name="values"/> exists within the <paramref name="source"/>; otherwise, false.</returns>
         public static bool ContainsAny<TSource, TValues>(this IEnumerable<TSource> source, params TValues[] values) where TValues : class, TSource where TSource : class
         {
             if (source == null)
@@ -31,6 +32,7 @@ namespace Extendy.Collections
         /// <param name="values">The elements to check for in the collection. 
         /// The collection itself cannot be null, but the values can be null, if T is a reference type./></param>.
         /// <exception cref="ArgumentNullException" />
+        /// <returns>true if any one of the <paramref name="values"/> exists within the <paramref name="source"/>; otherwise, false.</returns>
         public static bool ContainsAny<T>(this IEnumerable<T> source, params T[] values) where T : struct
         {
             if (source == null)
@@ -64,7 +66,6 @@ namespace Extendy.Collections
         /// Removes duplicate values from the <see cref="ICollection{T}"/>
         /// </summary>
         /// <typeparam name="T">The type of objects in the collection.</typeparam>
-        /// <param name="source">The collection to remove duplicates from</param>
         /// <exception cref="ArgumentNullException" />
         public static void RemoveDuplicates<T>(this ICollection<T> source)
         {
