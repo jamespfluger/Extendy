@@ -14,6 +14,7 @@ namespace Extendy.Collections
         /// <param name="values">The elements to check for in the collection
         /// The collection itself cannot be null, but the values can be null, if T is a reference type./></param>.
         /// <exception cref="ArgumentNullException" />
+        /// <returns>true if any one of the <paramref name="values"/> exists within the <paramref name="source"/>; otherwise, false.</returns>
         public static bool ContainsAny<TSource, TValues>(this IEnumerable<TSource> source, params TValues[] values) where TValues : class, TSource where TSource : class
         {
             if (source == null)
@@ -31,6 +32,7 @@ namespace Extendy.Collections
         /// <param name="values">The elements to check for in the collection. 
         /// The collection itself cannot be null, but the values can be null, if T is a reference type./></param>.
         /// <exception cref="ArgumentNullException" />
+        /// <returns>true if any one of the <paramref name="values"/> exists within the <paramref name="source"/>; otherwise, false.</returns>
         public static bool ContainsAny<T>(this IEnumerable<T> source, params T[] values) where T : struct
         {
             if (source == null)
