@@ -66,7 +66,6 @@ namespace Extendy.Collections
         /// Removes duplicate values from the <see cref="ICollection{T}"/>
         /// </summary>
         /// <typeparam name="T">The type of objects in the collection.</typeparam>
-        /// <param name="source">The collection to remove duplicates from</param>
         /// <exception cref="ArgumentNullException" />
         public static void RemoveDuplicates<T>(this ICollection<T> source)
         {
