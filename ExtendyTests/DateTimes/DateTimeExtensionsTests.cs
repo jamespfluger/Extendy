@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Extendy.DateTimes;
 using Xunit;
 
-namespace Extendy.Enums.Tests
+namespace ExtendyTests.DateTimes
 {
     public class DateTimeExtensionsTests
     {

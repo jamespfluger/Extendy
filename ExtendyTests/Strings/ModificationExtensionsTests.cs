@@ -2,7 +2,7 @@
 using Extendy.Strings.Modification;
 using Xunit;
 
-namespace Extendy.Tests.Strings.Modification
+namespace ExtendyTests.Strings.Modification
 {
     public class ModificationExtensionsTests
     {
