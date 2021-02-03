@@ -1,0 +1,15 @@
+# ModificationExtensions.TrimEndIgnoreCase Method 
+ 
+
+
+## Overload List
+&nbsp;<table><tr><th></th><th>Name</th><th>Description</th></tr><tr><td>![Public method](media/pubmethod.gif "Public method")![Static member](media/static.gif "Static member")</td><td><a href="M_Extendy_Strings_Modification_ModificationExtensions_TrimEndIgnoreCase">TrimEndIgnoreCase(String, Char)</a></td><td>
+Removes all the occurrences of the given character at the end of the current string object, case agnostic.</td></tr><tr><td>![Public method](media/pubmethod.gif "Public method")![Static member](media/static.gif "Static member")</td><td><a href="M_Extendy_Strings_Modification_ModificationExtensions_TrimEndIgnoreCase_1">TrimEndIgnoreCase(String, Char[])</a></td><td>
+Removes all the occurrences of a set of Unicode characters from the end of the current string object, case agnostic.</td></tr></table>&nbsp;
+<a href="#modificationextensions.trimendignorecase-method">Back to Top</a>
+
+## See Also
+
+
+#### Reference
+<a href="T_Extendy_Strings_Modification_ModificationExtensions">ModificationExtensions Class</a><br /><a href="N_Extendy_Strings_Modification">Extendy.Strings.Modification Namespace</a><br />
