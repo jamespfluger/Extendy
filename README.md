@@ -13,8 +13,8 @@ Absolutely! Open an issue up and we'll discuss your proposal. I don't want this 
 
 ### Which extenson methods are in Extendy?
 
-There are four main sections, with the strings namespace broken into four further ones.  
-I've considered consolidating them into one, but I don't want to bloat IntelliSense.
+There are four main sections, with the strings namespace broken into four further ones. I've considered consolidating them into one, but I don't want to bloat IntelliSense.  
+These are the namespaces available for import, which link to their corresponding methods and descriptions
 
 
 [`Extendy.Collections`](#extendycollections)  
