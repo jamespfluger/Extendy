@@ -17,6 +17,14 @@ There are four main sections, with the strings namespace broken into four furthe
 I've considered consolidating them into one, but I don't want to bloat IntelliSense.
 
 
+[`Extendy.Collections`](#extendycollections)  
+[`Extendy.DateTimes`](#extendydatetimes)  
+[`Extendy.Enums`](#extendyenums)  
+[`Extendy.Strings.Common`](#extendystringscommon)  
+[`Extendy.Strings.Modification`](#extendystringsmodification)  
+[`Extendy.Strings.Searching`](#extendystringssearching)  
+[`Extendy.Strings.TypeChecks`](#extendystringstypechecks)  
+
 #### `Extendy.Collections`
 
 | Method                                             | Summary                                                        |
@@ -43,6 +51,15 @@ I've considered consolidating them into one, but I don't want to bloat IntelliSe
 | ---------------------------- | ------------------------------------------- |
 | `ToEnum<T>()`                | Converts a string to the provided enum type |
 | `ToEnum<T>(bool ignoreCase)` | Converts a string to the provided enum type |
+
+
+#### `Extendy.Strings.Common`
+| Method                             | Summary                                                                                                    |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| EqualsIgnoreCase(string value)     | Determines whether this instance and another specified string object are the same value, agnostic of case. |
+| ContainsIgnoreCase(string value)   | Returns a value indicating whether a specified substring occurs within this string, agnostic of case.      |
+| StartsWithIgnoreCase(string value) | Determines whether the beginning of this string instance matches the specified string.                     |
+| EndsWithIgnoreCase(string value)   | Determines whether the end of this string instance matches the specified string.                           |
 
 
 #### `Extendy.Strings.Modification`
