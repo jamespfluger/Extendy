@@ -29,7 +29,7 @@ namespace ExtendyTests.Strings.TypeChecks
         [InlineData("", false)]
         public void IsNumericTest(string inputValue, bool expectedResult)
         {
-            bool isInteger = inputValue.IsNumeric();
+            bool isInteger = inputValue.IsInteger();
             Assert.Equal(expectedResult, isInteger);
         }
 
@@ -37,7 +37,7 @@ namespace ExtendyTests.Strings.TypeChecks
         [InlineData(null, typeof(ArgumentNullException), "Value cannot be null. (Parameter 'source')")]
         public void IsNumericExceptionTest(string inputValue, Type expectedExceptionType, string expectedErrorMessage)
         {
-            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsNumeric());
+            Exception thrownException = Assert.Throws(expectedExceptionType, () => inputValue.IsInteger());
             Assert.NotNull(thrownException);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
