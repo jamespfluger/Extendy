@@ -207,7 +207,6 @@ namespace Extendy.Strings.Searching
 
         /// <summary>
         /// Reports the zero-based index of the last occurrence of the specified Unicode character in this instance, case agnostic.
-        /// The search starts at a specified index and works backwards through the string for the specified number of character positions.
         /// </summary>
         /// <param name="value">The Unicode character to seek.</param>
         /// <returns>The zero-based index position of the last occurrence of <paramref name="value"/> if that Unicode character is found,
@@ -224,7 +223,7 @@ namespace Extendy.Strings.Searching
 
         /// <summary>
         /// Reports the zero-based index of the last occurrence of the specified Unicode character in this instance, case agnostic.
-        /// The search starts at a specified index and works backwards through the string for the specified number of character positions.
+        /// The search starts at a specified index and works backwards through the string.
         /// </summary>
         /// <param name="value">The Unicode character to seek.</param>
         /// <param name="startIndex">The search starting position.</param>

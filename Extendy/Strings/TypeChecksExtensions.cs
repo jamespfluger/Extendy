@@ -6,10 +6,10 @@ namespace Extendy.Strings.TypeChecks
     public static class TypeChecksExtensions
     {
         /// <summary>
-        /// Determines whether this instance contains only numeric characters
+        /// Determines whether this instance is an integer
         /// </summary>
         /// <returns>true if the string is numeric; otherwise, false.</returns>
-        public static bool IsNumeric(this string source)
+        public static bool IsInteger(this string source)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

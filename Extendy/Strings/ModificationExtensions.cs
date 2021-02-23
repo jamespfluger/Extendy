@@ -114,6 +114,7 @@ namespace Extendy.Strings.Modification
         /// Inverts the order of the elements in a string
         /// </summary>
         /// <returns>The inverted string</returns>
+        [Obsolete("This method will be removed in a future version. If you currently use this method, please open an issue on GitHub!")]
         public static string Reverse(this string source)
         {
             if (source == null)
