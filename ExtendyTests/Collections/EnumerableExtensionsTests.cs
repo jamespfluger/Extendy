@@ -206,5 +206,50 @@ namespace ExtendyTests.Collections
             Assert.NotNull(thrownException);
             Assert.Equal(expectedErrorMessage, thrownException.Message);
         }
+
+        [Fact]
+        public void AppendManyTest()
+        {
+            IEnumerable<int> intResult = new List<int>().AppendMany(5);
+            Assert.Equal(5, intResult.Count());
+            Assert.Equal(new List<int> { 0, 0, 0, 0, 0 }, intResult);
+
+            List<TestObject> objectResult = new List<TestObject>().AppendMany(3).ToList();
+            Assert.Equal(3, objectResult.Count);
+            Assert.True(objectResult.All(o => o.Id == 0 && o.Value == null));
+
+            IEnumerable<TestStruct> structSet = new HashSet<TestStruct>().AppendMany(3).ToHashSet();
+            Assert.Single(structSet);
+            Assert.Equal(0, structSet.First().Id);
+            Assert.Equal('\0', structSet.First().CharValue);
+            Assert.Equal(0, structSet.First().DecimalValue);
+
+            List<decimal> decimalList = new List<decimal> { -5m, 10m, 15m };
+            decimalList = decimalList.AppendMany(5).ToList();
+            Assert.Equal(-5m, decimalList[0]);
+            Assert.Equal(10m, decimalList[1]);
+            Assert.Equal(15m, decimalList[2]);
+            Assert.True(decimalList.Skip(3).All(d => d == 0m));
+        }
+
+        [Fact]
+        public void AppendManyArgumentNullExceptionTest()
+        {
+            IEnumerable<int> originalArray = null;
+
+            Exception thrownException = Assert.Throws<ArgumentNullException>(() => originalArray.AppendMany(5));
+            Assert.NotNull(thrownException);
+            Assert.Equal("Value cannot be null. (Parameter 'source')", thrownException.Message);
+        }
+
+        [Fact]
+        public void AppendManyArgumentOutOfRangeExceptionTest()
+        {
+            IEnumerable<int> originalArray = originalArray = new List<int>();
+
+            Exception thrownException = Assert.Throws<ArgumentOutOfRangeException>(() => originalArray.AppendMany(-1));
+            Assert.NotNull(thrownException);
+            Assert.Equal("Specified argument was out of the range of valid values. (Parameter 'count')", thrownException.Message);
+        }
     }
 }

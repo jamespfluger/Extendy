@@ -13,6 +13,10 @@ namespace ExtendyTests.TestData
             this.Value = Guid.NewGuid().ToString();
         }
 
+        public TestObject()
+        {
+        }
+
         public TestObject(int id, string value)
         {
             this.Id = id;

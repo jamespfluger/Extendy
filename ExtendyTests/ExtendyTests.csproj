@@ -11,6 +11,10 @@
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+  
+  <PropertyGroup Label="FineCodeCoverage">
+    <IncludeTestAssembly>False</IncludeTestAssembly>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />

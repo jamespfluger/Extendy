@@ -121,5 +121,25 @@ namespace Extendy.Collections
                 }
             }
         }
+
+        /// <summary>
+        /// Appends a specified number of default <typeparamref name="T"/> instances to the current instance.
+        /// The new instance uses the parameterless constructor for <typeparamref name="T"/>
+        /// </summary>
+        /// <typeparam name="T">The type of values in the collection.</typeparam>
+        /// <param name="count"></param>
+        /// <returns>The new instance with the appended items</returns>
+        public static IEnumerable<T> AppendMany<T>(this IEnumerable<T> source, int count) where T : new()
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (count < 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
+
+            for (int i = 0; i < count; i++)
+                source = source.Append(new T());
+
+            return source;
+        }
     }
 }
