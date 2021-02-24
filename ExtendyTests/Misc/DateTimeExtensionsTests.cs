@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Extendy.DateTimes;
+using Extendy.Misc;
 using Xunit;
 
-namespace ExtendyTests.DateTimes
+namespace ExtendyTests.Misc
 {
     public class DateTimeExtensionsTests
     {
