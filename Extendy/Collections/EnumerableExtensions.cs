@@ -128,6 +128,9 @@ namespace Extendy.Collections
         /// </summary>
         /// <typeparam name="T">The type of values in the collection.</typeparam>
         /// <param name="count">The number of items to add to the collection.</param>
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ArgumentOutOfRangeException" />
         /// <returns>The new instance with the appended items.</returns>
         public static IEnumerable<T> CreateMany<T>(this IEnumerable<T> source, int count) where T : new()
         {
@@ -144,10 +147,12 @@ namespace Extendy.Collections
 
         /// <summary>
         /// Appends a specified number of the <paramref name="item"/> instance to the current collection.
-        /// The new instance uses the parameterless constructor for.<typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">The type of values in the collection.</typeparam>
         /// <param name="count">The number of items to add to the collection.</param>
+        /// <exception cref="ArgumentException" />
+        /// <exception cref="ArgumentNullException" />
+        /// <exception cref="ArgumentOutOfRangeException" />
         /// <returns>The new instance with the appended items.</returns>
         public static IEnumerable<T> AppendMany<T>(this IEnumerable<T> source, T item, int count)
         {
@@ -156,10 +161,7 @@ namespace Extendy.Collections
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (int i = 0; i < count; i++)
-                source = source.Append(item);
-
-            return source;
+            return source.Concat(Enumerable.Repeat<T>(item, count));
         }
     }
 }

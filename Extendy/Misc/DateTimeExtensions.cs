@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Extendy.DateTimes
+namespace Extendy.Misc
 {
     public static class DateTimeExtensions
     {
